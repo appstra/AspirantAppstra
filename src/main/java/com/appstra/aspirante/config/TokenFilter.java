@@ -33,7 +33,7 @@ public class TokenFilter extends OncePerRequestFilter {
             String jwt = authorizationHeader.substring(7);
             try {
                 DecodedJWT decodedJWT = JWT.require(algorithm)
-                        .withIssuer("Appstr@2024")
+                        .withIssuer("usersAppstra")
                         .build()
                         .verify(jwt);
 
