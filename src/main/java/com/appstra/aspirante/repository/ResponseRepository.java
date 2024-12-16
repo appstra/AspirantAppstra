@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ResponseRepository extends JpaRepository<Response,Integer> {
     List<Response> findByAskAskId(Integer askId);
+    Response findByAskAskIdAndResponseAnswer(Integer askId,String responseAnswer);
 }

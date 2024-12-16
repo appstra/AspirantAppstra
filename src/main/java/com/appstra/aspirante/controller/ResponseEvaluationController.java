@@ -1,5 +1,6 @@
 package com.appstra.aspirante.controller;
 
+import com.appstra.aspirante.dto.AnswerEvaluationDTO;
 import com.appstra.aspirante.entity.ResponseEvaluation;
 import com.appstra.aspirante.service.ResponseEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,20 +21,14 @@ public class ResponseEvaluationController {
 
     @PostMapping("/saveresponseevaluation")
     @Operation(summary = "Guardar Respuesta Evaluación", description = "Guardar nueva respuesta de evaluación")
-    public ResponseEntity<ResponseEvaluation> saveResponseEvaluation(@Validated @RequestBody ResponseEvaluation responseEvaluation){
-        return ResponseEntity.ok(responseEvaluationService.saveResponseEvaluation(responseEvaluation));
+    public ResponseEntity<Boolean> saveResponseEvaluation(@Validated @RequestBody List<AnswerEvaluationDTO> answerEvaluationDTO){
+        return ResponseEntity.ok(responseEvaluationService.saveResponseEvaluation(answerEvaluationDTO));
     }
 
     @PutMapping("/updateresponseevaluation")
     @Operation(summary = "Actualizar Respuesta Evaluación", description = "Actualizar respuesta de evaluación existente")
     public ResponseEntity<ResponseEvaluation> updateResponseEvaluation(@Validated @RequestBody ResponseEvaluation responseEvaluation){
         return ResponseEntity.ok(responseEvaluationService.updateResponseEvaluation(responseEvaluation));
-    }
-
-    @DeleteMapping("/deleteresponseevaluation/{responseEvaluationId}")
-    @Operation(summary = "Eliminar Respuesta Evaluación", description = "Eliminar respuesta de evaluación por ID")
-    public ResponseEntity<Boolean> deleteResponseEvaluation(@PathVariable("responseEvaluationId") Integer responseEvaluationId){
-        return ResponseEntity.ok(responseEvaluationService.deleteResponseEvaluation(responseEvaluationId));
     }
 
     @GetMapping("/listresponseevaluations")
