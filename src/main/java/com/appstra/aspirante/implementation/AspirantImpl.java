@@ -53,5 +53,17 @@ public class AspirantImpl implements AspirantService {
         return aspirantRepository.findById(aspirantId)
                 .orElseThrow(() -> new NoSuchElementException("El aspirante con el ID: " + aspirantId + " no se encontró"));
     }
+
+    @Override
+    public Aspirant findByAspirantPersonId(Integer aspirantId) {
+        Aspirant aspirant = aspirantRepository.findByPersonId(aspirantId);
+        if (aspirant != null) {
+            return aspirant;
+        } else {
+            throw new RuntimeException("El aspirante con el ID: " + aspirantId + " no se encontró");
+        }
+    }
+
+
 }
 

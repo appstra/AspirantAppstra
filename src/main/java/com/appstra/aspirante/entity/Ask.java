@@ -35,6 +35,7 @@ public class Ask {
     @Column(name = "ASK_EDIT_USER_ID")
     private Integer askEditUserId;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "COMP_ID", referencedColumnName = "COMP_ID")
     private Competence competence;

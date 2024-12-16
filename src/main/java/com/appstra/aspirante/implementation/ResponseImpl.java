@@ -53,5 +53,10 @@ public class ResponseImpl implements ResponseService {
         return responseRepository.findById(responseId)
                 .orElseThrow(() -> new NoSuchElementException("La respuesta con el ID: " + responseId + " no se encontró"));
     }
+
+    @Override
+    public List<Response> findByAskId(Integer AskId) {
+        return responseRepository.findByAskAskId(AskId);
+    }
 }
 

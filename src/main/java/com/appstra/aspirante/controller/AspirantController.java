@@ -47,5 +47,10 @@ public class AspirantController {
     public ResponseEntity<Aspirant> getAspirant(@PathVariable("aspirantId") Integer aspirantId){
         return ResponseEntity.ok(aspirantService.getAspirant(aspirantId));
     }
+    @GetMapping("/personId/{personId}")
+    @Operation(summary = "Información del Aspirante por persona ID", description = "Obtener información del aspirante por Persona ID")
+    public ResponseEntity<Aspirant> getAspirantPerson(@PathVariable("personId") Integer personId){
+        return ResponseEntity.ok(aspirantService.findByAspirantPersonId(personId));
+    }
 }
 

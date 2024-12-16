@@ -32,7 +32,7 @@ public class AskImpl implements AskService {
                 .orElseThrow(() -> new IllegalArgumentException("La pregunta no existe: " + ask.getAskId()));
         ask.setAskCreationDate(existingAsk.getAskCreationDate());
         ask.setAskEditDate(Timestamp.valueOf(LocalDateTime.now()));
-        return askRepository.save(existingAsk);
+        return askRepository.save(ask);
     }
 
     @Override

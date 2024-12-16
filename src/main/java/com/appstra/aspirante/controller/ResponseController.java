@@ -47,5 +47,10 @@ public class ResponseController {
     public ResponseEntity<Response> getResponse(@PathVariable("responseId") Integer responseId){
         return ResponseEntity.ok(responseService.getResponse(responseId));
     }
+    @GetMapping("listResponseAsk/{askId}")
+    @Operation(summary = "Lista las respuestas que tiene la pregunta", description = "Obtener las opciones que tiene de la respuesta por ID")
+    public ResponseEntity<List<Response>> getAskResponse(@PathVariable("askId") Integer askId){
+        return ResponseEntity.ok(responseService.findByAskId(askId));
+    }
 }
 

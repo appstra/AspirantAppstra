@@ -10,4 +10,5 @@ public interface ResponseService {
     Boolean deleteResponse(Integer responseId);
     List<Response> listResponses();
     Response getResponse(Integer responseId);
+    List<Response> findByAskId(Integer AskId);
 }

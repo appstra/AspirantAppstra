@@ -10,5 +10,6 @@ public interface AspirantService {
     Boolean deleteAspirant(Integer aspirantId);
     List<Aspirant> listAspirants();
     Aspirant getAspirant(Integer aspirantId);
+    Aspirant findByAspirantPersonId(Integer aspirantId);
 }
 
