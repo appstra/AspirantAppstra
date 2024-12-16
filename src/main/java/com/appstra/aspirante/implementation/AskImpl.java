@@ -31,6 +31,7 @@ public class AskImpl implements AskService {
         Ask existingAsk = askRepository.findById(ask.getAskId())
                 .orElseThrow(() -> new IllegalArgumentException("La pregunta no existe: " + ask.getAskId()));
         ask.setAskCreationDate(existingAsk.getAskCreationDate());
+        ask.setAskEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return askRepository.save(existingAsk);
     }
 

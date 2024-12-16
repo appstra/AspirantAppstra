@@ -30,6 +30,7 @@ public class CompetenceImpl implements CompetenceService {
         Competence existingCompetence = competenceRepository.findById(competence.getCompetenceId())
                 .orElseThrow(() -> new IllegalArgumentException("La competencia no existe: " + competence.getCompetenceId()));
         competence.setCompetenceCreationDate(existingCompetence.getCompetenceCreationDate());
+        competence.setCompetenceEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return competenceRepository.save(competence);
     }
 

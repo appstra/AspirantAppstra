@@ -30,6 +30,7 @@ public class AspirantImpl implements AspirantService {
         Aspirant existingAspirant = aspirantRepository.findById(aspirant.getAspirantId())
                 .orElseThrow(() -> new IllegalArgumentException("El aspirante no existe: " + aspirant.getAspirantId()));
         aspirant.setAspirantCreationDate(existingAspirant.getAspirantCreationDate());
+        aspirant.setAspirantEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return aspirantRepository.save(aspirant);
     }
 

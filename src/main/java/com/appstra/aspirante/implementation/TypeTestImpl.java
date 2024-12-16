@@ -30,6 +30,7 @@ public class TypeTestImpl implements TypeTestService {
         TypeTest existingTypeTest = typeTestRepository.findById(typeTest.getTypeTestId())
                 .orElseThrow(() -> new IllegalArgumentException("El tipo de test no existe: " + typeTest.getTypeTestId()));
         typeTest.setTypeTestCreationDate(existingTypeTest.getTypeTestCreationDate());
+        typeTest.setTypeTestEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return typeTestRepository.save(typeTest);
     }
 

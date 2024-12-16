@@ -35,6 +35,7 @@ public class Competence {
     @Column(name = "COMP_EDIT_USER_ID")
     private Integer competenceEditUserId;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "TYTE_ID", referencedColumnName = "TYTE_ID")
     private TypeTest typeTest;

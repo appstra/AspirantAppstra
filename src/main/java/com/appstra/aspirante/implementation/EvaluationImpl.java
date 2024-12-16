@@ -30,6 +30,7 @@ public class EvaluationImpl implements EvaluationService {
         Evaluation existingEvaluation = evaluationRepository.findById(evaluation.getEvaluationId())
                 .orElseThrow(() -> new IllegalArgumentException("La evaluación no existe: " + evaluation.getEvaluationId()));
         evaluation.setEvaluationCreationDate(existingEvaluation.getEvaluationCreationDate());
+        evaluation.setEvaluationEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return evaluationRepository.save(evaluation);
     }
 

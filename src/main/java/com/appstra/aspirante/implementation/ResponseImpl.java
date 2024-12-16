@@ -30,6 +30,7 @@ public class ResponseImpl implements ResponseService {
         Response existingResponse = responseRepository.findById(response.getResponseId())
                 .orElseThrow(() -> new IllegalArgumentException("La respuesta no existe: " + response.getResponseId()));
         response.setResponseCreationDate(existingResponse.getResponseCreationDate());
+        response.setResponseEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return responseRepository.save(response);
     }
 

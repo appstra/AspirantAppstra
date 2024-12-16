@@ -30,6 +30,7 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
         ResponseEvaluation existingResponseEvaluation = responseEvaluationRepository.findById(responseEvaluation.getResponseEvaluationId())
                 .orElseThrow(() -> new IllegalArgumentException("La evaluación de respuesta no existe: " + responseEvaluation.getResponseEvaluationId()));
         responseEvaluation.setResponseEvaluationCreationDate(existingResponseEvaluation.getResponseEvaluationCreationDate());
+        responseEvaluation.setResponseEvaluationEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return responseEvaluationRepository.save(responseEvaluation);
     }
 

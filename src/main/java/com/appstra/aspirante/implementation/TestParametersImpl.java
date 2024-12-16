@@ -30,6 +30,7 @@ public class TestParametersImpl implements TestParametersService {
         TestParameters existingTestParameters = testParametersRepository.findById(testParameters.getTestParametersId())
                 .orElseThrow(() -> new IllegalArgumentException("Los parámetros del test no existen: " + testParameters.getTestParametersId()));
         testParameters.setTestParametersCreationDate(existingTestParameters.getTestParametersCreationDate());
+        testParameters.setTestParametersEditDate(Timestamp.valueOf(LocalDateTime.now()));
         return testParametersRepository.save(testParameters);
     }
 
