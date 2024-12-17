@@ -1,6 +1,7 @@
 package com.appstra.aspirante.implementation;
 
 import com.appstra.aspirante.dto.AnswerEvaluationDTO;
+import com.appstra.aspirante.dto.QualificationEvaluationDTO;
 import com.appstra.aspirante.entity.Ask;
 import com.appstra.aspirante.entity.Evaluation;
 import com.appstra.aspirante.entity.Response;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -85,6 +87,11 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
     public ResponseEvaluation getResponseEvaluation(Integer responseEvaluationId) {
         return responseEvaluationRepository.findById(responseEvaluationId)
                 .orElseThrow(() -> new NoSuchElementException("La evaluación de respuesta con el ID: " + responseEvaluationId + " no se encontró"));
+    }
+
+    @Override
+    public List<Map<String, Object>> qualificationEvaluation(QualificationEvaluationDTO qualificationEvaluationDTO) {
+        return responseEvaluationRepository.QualificationEvaluation(qualificationEvaluationDTO.getAspirantId(),qualificationEvaluationDTO.getEvaluationId());
     }
 }
 

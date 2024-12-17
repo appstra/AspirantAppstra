@@ -1,0 +1,78 @@
+-- FUNCTION: public.get_competence_response_summary(integer, integer)
+
+-- DROP FUNCTION IF EXISTS public.get_competence_response_summary(integer, integer);
+
+CREATE OR REPLACE FUNCTION public.get_competence_response_summary(
+	evaluationid integer,
+	competence_id integer)
+    RETURNS TABLE(competenceid integer, competencename text, responseanswersum integer) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT
+        comp.comp_id as "competenceId",
+        comp.comp_name::TEXT as "competenceName",  -- Conversión explícita a TEXT
+        SUM(CAST(resp.resp_answer AS INTEGER))::INTEGER AS "responseAnswerSum"
+    FROM
+        transactional.response_evaluation reev
+    INNER JOIN parameterization.ask ask ON reev.ask_id = ask.ask_id
+    INNER JOIN parameterization.response resp ON reev.resp_id = resp.resp_id
+    INNER JOIN parameterization.competence comp ON ask.comp_id = comp.comp_id
+    WHERE 
+        reev.eval_id = evaluationid
+		and comp.comp_id = competence_id
+    GROUP BY
+        comp.comp_id,
+        comp.comp_name;
+END;
+$BODY$;
+
+ALTER FUNCTION public.get_competence_response_summary(integer, integer)
+    OWNER TO postgres;
+
+--------------------------------------------------------------------------------------------------------------------------
+
+-- FUNCTION: public.get_max_score_competence(integer)
+
+-- DROP FUNCTION IF EXISTS public.get_max_score_competence(integer);
+
+CREATE OR REPLACE FUNCTION public.get_max_score_competence(
+	comp_id_param integer)
+    RETURNS TABLE(competenceid integer, competencename text, responsevaluemax text, competencevaluemax integer) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        DISTINCT
+        ask.comp_id AS "competenceId",
+        (SELECT comp.comp_name::text 
+         FROM parameterization.competence comp
+         WHERE comp.comp_id = comp_id_param) AS "competenceName",
+        MAX(resp.resp_answer)::text AS "responseValueMax",
+        CAST(
+    MAX(resp.resp_answer::INTEGER) * (select COUNT(ask1.ask_id::INTEGER) from parameterization.ask ask1 where ask1.comp_id = comp_id_param) AS INTEGER) AS "competenceValueMax"
+    FROM 
+        parameterization.ask ask
+        INNER JOIN parameterization.response resp ON ask.ask_id = resp.ask_id
+    WHERE 
+        ask.comp_id = comp_id_param
+    GROUP BY "competenceId", "competenceName";
+END;
+$BODY$;
+
+ALTER FUNCTION public.get_max_score_competence(integer)
+    OWNER TO postgres;
+
+COMMENT ON FUNCTION public.get_max_score_competence(integer)
+    IS 'esta función muestra el valor maximo por competencia ';
+

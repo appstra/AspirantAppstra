@@ -1,6 +1,7 @@
 package com.appstra.aspirante.controller;
 
 import com.appstra.aspirante.dto.AnswerEvaluationDTO;
+import com.appstra.aspirante.dto.QualificationEvaluationDTO;
 import com.appstra.aspirante.entity.ResponseEvaluation;
 import com.appstra.aspirante.service.ResponseEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/ResponseEvaluation")
@@ -41,5 +43,11 @@ public class ResponseEvaluationController {
     @Operation(summary = "Información de la Respuesta Evaluación", description = "Obtener información de la respuesta de evaluación por ID")
     public ResponseEntity<ResponseEvaluation> getResponseEvaluation(@PathVariable("responseEvaluationId") Integer responseEvaluationId){
         return ResponseEntity.ok(responseEvaluationService.getResponseEvaluation(responseEvaluationId));
+    }
+
+    @PostMapping("/QualificationEvaluation")
+    @Operation(summary = "Califica Evaluación", description = "Califica respuesta de evaluación")
+    public ResponseEntity<List<Map<String, Object>>> qualificationEvaluation(@Validated @RequestBody QualificationEvaluationDTO qualificationEvaluationDTO){
+        return ResponseEntity.ok(responseEvaluationService.qualificationEvaluation(qualificationEvaluationDTO));
     }
 }
