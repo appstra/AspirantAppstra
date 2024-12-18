@@ -1,3 +1,4 @@
+------------------------------------------Prueba psicologica--------------------------------------------------------------------
 -- FUNCTION: public.get_competence_response_summary(integer, integer)
 
 -- DROP FUNCTION IF EXISTS public.get_competence_response_summary(integer, integer);
@@ -35,7 +36,7 @@ $BODY$;
 ALTER FUNCTION public.get_competence_response_summary(integer, integer)
     OWNER TO postgres;
 
---------------------------------------------------------------------------------------------------------------------------
+------------------------------------------Prueba psicologica--------------------------------------------------------------------
 
 -- FUNCTION: public.get_max_score_competence(integer)
 
@@ -76,3 +77,50 @@ ALTER FUNCTION public.get_max_score_competence(integer)
 COMMENT ON FUNCTION public.get_max_score_competence(integer)
     IS 'esta función muestra el valor maximo por competencia ';
 
+-------------------------------------------Pruebas personalidad-----------------------------------------------------------------------
+-- FUNCTION: public.get_calcular_puntuacion(integer)
+
+-- DROP FUNCTION IF EXISTS public.get_calcular_puntuacion(integer);
+
+CREATE OR REPLACE FUNCTION public.get_calcular_puntuacion(
+	eval_id_param integer)
+    RETURNS TABLE(competenceid integer, puntuacionaspirante integer, numeropreguntas integer, porcentaje integer)
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+    BEGIN
+        RETURN QUERY
+        SELECT
+		comp_id as "competenceId",
+	    SUM(CASE WHEN resp_answer IN ('A Veces', 'Siempre') THEN count_resp ELSE 0 END)::INTEGER AS "PuntuacionAspirante",
+	    SUM(count_resp)::INTEGER AS "NumeroPreguntas",
+	    ROUND(
+	        (SUM(CASE WHEN resp_answer IN ('A Veces', 'Siempre') THEN count_resp ELSE 0 END) * 100.0) /
+	        SUM(count_resp))::INTEGER AS porcentaje
+    FROM (
+        SELECT
+			comp.comp_id,
+            resp.resp_answer,
+            COUNT(resp.resp_answer) AS count_resp
+        FROM
+            parameterization.type_test tyte
+            INNER JOIN parameterization.competence comp ON tyte.tyte_id = comp.tyte_id
+            INNER JOIN parameterization.ask ask ON comp.comp_id = ask.comp_id
+            INNER JOIN transactional.response_evaluation reev ON ask.ask_id = reev.ask_id
+            INNER JOIN parameterization.evaluation eval ON reev.eval_id = eval.eval_id
+            INNER JOIN parameterization.response resp ON reev.resp_id = resp.resp_id
+        WHERE
+            eval.eval_id = eval_id_param
+			and tyte.tyte_id = 3
+        GROUP BY comp.comp_id,resp.resp_answer
+    ) AS subconsulta
+	GROUP BY comp_id;
+    END;
+
+$BODY$;
+
+ALTER FUNCTION public.get_calcular_puntuacion(integer)
+    OWNER TO postgres;

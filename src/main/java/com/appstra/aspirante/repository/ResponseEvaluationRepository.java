@@ -45,4 +45,17 @@ public interface ResponseEvaluationRepository extends JpaRepository<ResponseEval
             ORDER BY comp.comp_id ASC
             """,nativeQuery = true)
     List<Map<String, Object>> QualificationEvaluation(@Param("aspirantId") Integer aspirantId, @Param("evaluationId") Integer evaluationId);
+    @Query(value = """
+            select
+            	prueba.competenceid AS "competenceid",
+            	prueba.puntuacionaspirante AS "aspirantScore",
+            	prueba.numeropreguntas "numberAsk",
+            	prueba.porcentaje || '%' AS porcentaje,
+            	tepa.tepa_description  as "testParametersDescription"
+            from
+            	get_calcular_puntuacion(?1) prueba
+            	inner join transactional.test_parameters tepa on prueba.competenceid = tepa.comp_id
+            	and Prueba.porcentaje BETWEEN tepa.tepa_value_min and tepa.tepa_value_max
+            """,nativeQuery = true)
+    Map<String, Object> QualificationEvaluationPersonalidad(@Param("evaluationId") Integer evaluationId);
 }

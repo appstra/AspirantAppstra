@@ -10,4 +10,5 @@ public interface EvaluationService {
     Boolean deleteEvaluation(Integer evaluationId);
     List<Evaluation> listEvaluations();
     Evaluation getEvaluation(Integer evaluationId);
+    List<Evaluation> getEvaluationAspirant (Integer evaluationId);
 }

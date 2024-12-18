@@ -53,5 +53,10 @@ public class EvaluationImpl implements EvaluationService {
         return evaluationRepository.findById(evaluationId)
                 .orElseThrow(() -> new NoSuchElementException("La evaluación con el ID: " + evaluationId + " no se encontró"));
     }
+
+    @Override
+    public List<Evaluation> getEvaluationAspirant(Integer evaluationId) {
+        return evaluationRepository.findByAspirantAspirantId(evaluationId);
+    }
 }
 

@@ -24,11 +24,13 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
     private final ResponseEvaluationRepository responseEvaluationRepository;
     private final AskRepository askRepository;
     private final ResponseRepository responseRepository;
+    private final EvaluationImpl evaluationImpl;
 
-    public ResponseEvaluationImpl(ResponseEvaluationRepository responseEvaluationRepository, AskRepository askRepository, ResponseRepository responseRepository, EvaluationRepository evaluationRepository) {
+    public ResponseEvaluationImpl(ResponseEvaluationRepository responseEvaluationRepository, AskRepository askRepository, ResponseRepository responseRepository, EvaluationRepository evaluationRepository, EvaluationRepository evaluationRepository1, EvaluationImpl evaluationImpl) {
         this.responseEvaluationRepository = responseEvaluationRepository;
         this.askRepository = askRepository;
         this.responseRepository = responseRepository;
+        this.evaluationImpl = evaluationImpl;
     }
 
     @Override
@@ -53,7 +55,7 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
             Integer askId = askRepository.findByAskAsk(itera.getName()).getAskId();
             if (askId != null) {
                 responseEvaluation.getAsk().setAskId(askId);
-                Integer responseId = responseRepository.findByAskAskIdAndResponseAnswer(askId, String.valueOf(itera.getSelected())).getResponseId();
+                Integer responseId = responseRepository.findByAskAskIdAndResponseAnswer(askId, itera.getSelected()).getResponseId();
                 if (responseId != null) {
                     responseEvaluation.getResponse().setResponseId(responseId);
                     responseEvaluationRepository.save(responseEvaluation);
@@ -64,9 +66,11 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
                 throw new IllegalArgumentException("El askId es nulo. Error al Guardar");
             }
         }
-
+        //actualiza el estado de la evaluacion
+        Evaluation evaluation = evaluationImpl.getEvaluation(answerEvaluationDTO.get(0).getEvaluationId());
+        evaluation.setStateId(5);
+        evaluationImpl.updateEvaluation(evaluation);
         return true;
-
     }
 
     @Override
@@ -92,6 +96,11 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
     @Override
     public List<Map<String, Object>> qualificationEvaluation(QualificationEvaluationDTO qualificationEvaluationDTO) {
         return responseEvaluationRepository.QualificationEvaluation(qualificationEvaluationDTO.getAspirantId(),qualificationEvaluationDTO.getEvaluationId());
+    }
+
+    @Override
+    public Map<String, Object> QualificationEvaluationPersonalidad(Integer evaluationId) {
+        return responseEvaluationRepository.QualificationEvaluationPersonalidad(evaluationId);
     }
 }
 

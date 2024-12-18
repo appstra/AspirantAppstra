@@ -47,5 +47,11 @@ public class EvaluationController {
     public ResponseEntity<Evaluation> getEvaluation(@PathVariable("evaluationId") Integer evaluationId){
         return ResponseEntity.ok(evaluationService.getEvaluation(evaluationId));
     }
+
+    @GetMapping("getEvaluationAspirant/{aspirantId}")
+    @Operation(summary = "Listar Evaluaciones por aspirante", description = "Obtener información de la evaluación por ID de aspirante")
+    public ResponseEntity<List<Evaluation>> getEvaluationAspirant(@PathVariable("aspirantId") Integer aspirantId){
+        return ResponseEntity.ok(evaluationService.getEvaluationAspirant(aspirantId));
+    }
 }
 

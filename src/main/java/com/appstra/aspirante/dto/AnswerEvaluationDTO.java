@@ -3,7 +3,7 @@ package com.appstra.aspirante.dto;
 public class AnswerEvaluationDTO {
 
     private String name;
-    private Integer selected;
+    private String selected;
     private Integer evaluationId;
 
     public String getName() {
@@ -14,11 +14,11 @@ public class AnswerEvaluationDTO {
         this.name = name;
     }
 
-    public Integer getSelected() {
+    public String getSelected() {
         return selected;
     }
 
-    public void setSelected(Integer selected) {
+    public void setSelected(String selected) {
         this.selected = selected;
     }
 
