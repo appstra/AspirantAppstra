@@ -50,4 +50,12 @@ public class Aspirant {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "aspirant")
     private List<Evaluation> evaluationList;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "aspirant")
+    private List<LaborExperience> LaborExperience;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "aspirant")
+    private List<DescriptionFamily> familyDescriptions;
 }
