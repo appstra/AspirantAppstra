@@ -1,5 +1,6 @@
 package com.appstra.aspirante.service;
 
+import com.appstra.aspirante.dto.EmployeeDTO;
 import com.appstra.aspirante.entity.Evaluation;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface EvaluationService {
     List<Evaluation> listEvaluations();
     Evaluation getEvaluation(Integer evaluationId);
     List<Evaluation> getEvaluationAspirant (Integer evaluationId);
+    EmployeeDTO stateContratationAspirants(Integer aspirantId);
 }

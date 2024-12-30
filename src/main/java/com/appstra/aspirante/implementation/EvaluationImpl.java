@@ -1,7 +1,10 @@
 package com.appstra.aspirante.implementation;
 
+import com.appstra.aspirante.dto.EmployeeDTO;
+import com.appstra.aspirante.entity.Aspirant;
 import com.appstra.aspirante.entity.Evaluation;
 import com.appstra.aspirante.repository.EvaluationRepository;
+import com.appstra.aspirante.service.AspirantService;
 import com.appstra.aspirante.service.EvaluationService;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,11 @@ import java.util.NoSuchElementException;
 @Service
 public class EvaluationImpl implements EvaluationService {
     private final EvaluationRepository evaluationRepository;
+    private final AspirantService aspirantService;
 
-    public EvaluationImpl(EvaluationRepository evaluationRepository) {
+    public EvaluationImpl(EvaluationRepository evaluationRepository, AspirantService aspirantService) {
         this.evaluationRepository = evaluationRepository;
+        this.aspirantService = aspirantService;
     }
 
     @Override
@@ -57,6 +62,27 @@ public class EvaluationImpl implements EvaluationService {
     @Override
     public List<Evaluation> getEvaluationAspirant(Integer evaluationId) {
         return evaluationRepository.findByAspirantAspirantId(evaluationId);
+    }
+
+    @Override
+    public EmployeeDTO stateContratationAspirants(Integer aspirantId) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        Boolean contratacion = evaluationRepository.stateContratationAspirants(aspirantId);
+        if(contratacion){
+            Aspirant aspirant = aspirantService.getAspirant(aspirantId);
+            aspirant.setStateId(8);
+            aspirant = aspirantService.updateAspirant(aspirant);
+            if(aspirant.getStateId().equals(8)){
+                employeeDTO.setStateId(1);
+                employeeDTO.setCompanyId(aspirant.getCompanyId());
+                employeeDTO.setPersonId(aspirant.getPersonId());
+                employeeDTO.setRoleId(aspirant.getRoleId());
+                employeeDTO.setMesagge("Se cambio el estado al aspirante");
+            }
+        }else {
+            employeeDTO.setMesagge("Al aspirante le falta realizar las evaluaciones");
+        }
+        return employeeDTO;
     }
 }
 

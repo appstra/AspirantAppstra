@@ -1,5 +1,6 @@
 package com.appstra.aspirante.controller;
 
+import com.appstra.aspirante.dto.EmployeeDTO;
 import com.appstra.aspirante.entity.Evaluation;
 import com.appstra.aspirante.service.EvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,6 +53,12 @@ public class EvaluationController {
     @Operation(summary = "Listar Evaluaciones por aspirante", description = "Obtener información de la evaluación por ID de aspirante")
     public ResponseEntity<List<Evaluation>> getEvaluationAspirant(@PathVariable("aspirantId") Integer aspirantId){
         return ResponseEntity.ok(evaluationService.getEvaluationAspirant(aspirantId));
+    }
+
+    @GetMapping("/stateContratationAspirants/{aspirantId}")
+    @Operation(summary = "estado de contratacion", description = "Estado de contratacion del aspirantes")
+    public ResponseEntity<EmployeeDTO> stateContratationAspirants(@PathVariable("aspirantId") Integer aspirantId){
+        return ResponseEntity.ok(evaluationService.stateContratationAspirants(aspirantId));
     }
 }
 

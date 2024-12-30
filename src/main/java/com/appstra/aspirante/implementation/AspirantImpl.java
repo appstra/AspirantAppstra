@@ -45,7 +45,7 @@ public class AspirantImpl implements AspirantService {
 
     @Override
     public List<Aspirant> listAspirants() {
-        return aspirantRepository.findAll();
+        return aspirantRepository.findByStateIdNot(8);
     }
 
     @Override
