@@ -102,5 +102,15 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
     public Map<String, Object> QualificationEvaluationPersonalidad(Integer evaluationId) {
         return responseEvaluationRepository.QualificationEvaluationPersonalidad(evaluationId);
     }
+
+    @Override
+    public List<Map<String, Object>> qualificationEvaluationPersonId(Integer personId) {
+        return responseEvaluationRepository.QualificationEvaluationPersonId(personId);
+    }
+
+    @Override
+    public Map<String, Object> QualificationEvaluationPersonalidadPersonId(Integer personId) {
+        return responseEvaluationRepository.QualificationEvaluationPersonalidadPersonId(personId);
+    }
 }
 

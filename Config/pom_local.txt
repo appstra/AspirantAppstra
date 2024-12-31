@@ -11,7 +11,9 @@
 	<groupId>com.appstra</groupId>
 	<artifactId>aspirante</artifactId>
 	<version>0.0.1</version>
-	<name>aspirante</name>
+    <packaging>war</packaging>
+    <!--<packaging>jar</packaging>-->
+    <name>aspirante</name>
 	<description>MicroServisio de Aspirante</description>
 	<url/>
 	<licenses>

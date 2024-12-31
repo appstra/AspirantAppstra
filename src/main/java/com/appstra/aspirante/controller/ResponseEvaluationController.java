@@ -55,4 +55,15 @@ public class ResponseEvaluationController {
     public ResponseEntity<Map<String, Object>> QualificationEvaluationPersonalidad(@PathVariable("evaluationId") Integer evaluationId){
         return ResponseEntity.ok(responseEvaluationService.QualificationEvaluationPersonalidad(evaluationId));
     }
+
+    @GetMapping("/QualificationEvaluationPersonId/{personId}")
+    @Operation(summary = "Califica Evaluación por PersonId", description = "Califica respuesta de evaluación por PersonId")
+    public ResponseEntity<List<Map<String, Object>>> qualificationEvaluationPersonId(@PathVariable("personId") Integer personId){
+        return ResponseEntity.ok(responseEvaluationService.qualificationEvaluationPersonId(personId));
+    }
+    @GetMapping("/QualificationEvaluationPersonalidadPersonId/{personId}")
+    @Operation(summary = "Califica Evaluación de personalidad por PersonId", description = "Califica respuesta de evaluación de personalidad PersonId")
+    public ResponseEntity<Map<String, Object>> QualificationEvaluationPersonalidadPersonId(@PathVariable("personId") Integer personId){
+        return ResponseEntity.ok(responseEvaluationService.QualificationEvaluationPersonalidadPersonId(personId));
+    }
 }
