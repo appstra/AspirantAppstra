@@ -1,0 +1,9 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "info.appstra@gmail.com"
+    password: "jjuq xrmx qzio vdnw"
+    protocol: smtp
+    tls: true
+    debug: true
