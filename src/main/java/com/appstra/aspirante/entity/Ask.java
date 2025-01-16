@@ -26,6 +26,9 @@ public class Ask {
     @Column(name = "ASK_ASK")
     private String askAsk;
 
+    @Column(name = "ASK_TYPE")
+    private String askType;
+
     @Column(name = "ASK_CREATION_DATE")
     private Timestamp askCreationDate;
 

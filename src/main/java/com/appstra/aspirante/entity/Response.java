@@ -21,6 +21,9 @@ public class Response {
     @Column(name = "RESP_ANSWER")
     private String responseAnswer;
 
+    @Column(name = "RESP_ANSWER_CORRECT")
+    private Boolean responseAnswerCorret;
+
     @Column(name = "RESP_CREATION_DATE")
     private Timestamp responseCreationDate;
 
