@@ -52,5 +52,11 @@ public class AspirantController {
     public ResponseEntity<Aspirant> getAspirantPerson(@PathVariable("personId") Integer personId){
         return ResponseEntity.ok(aspirantService.findByAspirantPersonId(personId));
     }
+
+    @GetMapping("/listaspirants/findByStateId/{stateId}")
+    @Operation(summary = "Lista de Aspirantes por estado", description = "Obtener lista de todos los aspirantes por estado")
+    public ResponseEntity<List<Aspirant>> findByStateId(@PathVariable("stateId") Integer stateId){
+        return ResponseEntity.ok(aspirantService.findByStateId(stateId));
+    }
 }
 

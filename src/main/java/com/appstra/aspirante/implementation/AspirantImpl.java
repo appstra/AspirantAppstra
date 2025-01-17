@@ -64,6 +64,11 @@ public class AspirantImpl implements AspirantService {
         }
     }
 
+    @Override
+    public List<Aspirant> findByStateId(Integer stateId) {
+        return aspirantRepository.findByStateId(stateId);
+    }
+
 
 }
 

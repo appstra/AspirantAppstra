@@ -8,4 +8,5 @@ import java.util.List;
 public interface AspirantRepository extends JpaRepository<Aspirant,Integer> {
     Aspirant findByPersonId (Integer personId);
     List<Aspirant> findByStateIdNot(Integer stateId);
+    List<Aspirant> findByStateId(Integer stateId);
 }
