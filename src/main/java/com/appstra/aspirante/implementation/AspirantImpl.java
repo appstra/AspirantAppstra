@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 public class AspirantImpl implements AspirantService {
+    public static final int CONTRATADO = 8;
+    public static final int INACTIVO = 11;
+
     private final AspirantRepository aspirantRepository;
 
     public AspirantImpl(AspirantRepository aspirantRepository) {
@@ -37,7 +41,11 @@ public class AspirantImpl implements AspirantService {
     @Override
     public Boolean deleteAspirant(Integer aspirantId) {
         if (aspirantRepository.existsById(aspirantId)) {
-            aspirantRepository.deleteById(aspirantId);
+            Aspirant aspirant = aspirantRepository.findById(aspirantId)
+                    .orElseThrow(() -> new IllegalArgumentException("El aspirante no existe: " + aspirantId));
+            aspirant.setStateId(this.INACTIVO);
+            aspirant.setAspirantEditDate(Timestamp.valueOf(LocalDateTime.now()));
+            aspirantRepository.save(aspirant);
             return true;
         }
         return false;
@@ -45,7 +53,8 @@ public class AspirantImpl implements AspirantService {
 
     @Override
     public List<Aspirant> listAspirants() {
-        return aspirantRepository.findByStateIdNot(8);
+        List<Integer> excludedIds = Arrays.asList(this.CONTRATADO, this.INACTIVO);
+        return aspirantRepository.findByStateIdNotIn(excludedIds);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class AspirantController {
         return ResponseEntity.ok(aspirantService.updateAspirant(aspirant));
     }
 
-    @DeleteMapping("/deleteaspirant/{aspirantId}")
+    @PutMapping("/deleteaspirant/{aspirantId}")
     @Operation(summary = "Eliminar Aspirante", description = "Eliminar aspirante por ID")
     public ResponseEntity<Boolean> deleteAspirant(@PathVariable("aspirantId") Integer aspirantId){
         return ResponseEntity.ok(aspirantService.deleteAspirant(aspirantId));
