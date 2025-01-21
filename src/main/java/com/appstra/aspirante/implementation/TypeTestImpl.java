@@ -37,7 +37,12 @@ public class TypeTestImpl implements TypeTestService {
     @Override
     public Boolean deleteTypeTest(Integer typeTestId) {
         if (typeTestRepository.existsById(typeTestId)) {
-            typeTestRepository.deleteById(typeTestId);
+            TypeTest typeTest = typeTestRepository.findById(typeTestId)
+                    .orElseThrow(() -> new IllegalArgumentException("El tipo de test no existe: " + typeTestId));
+            typeTest.setStatId(13);
+            typeTest.setTypeTestEditDate(Timestamp.valueOf(LocalDateTime.now()));
+
+            typeTestRepository.save(typeTest);
             return true;
         }
         return false;
@@ -45,7 +50,7 @@ public class TypeTestImpl implements TypeTestService {
 
     @Override
     public List<TypeTest> listTypeTests() {
-        return typeTestRepository.findAll();
+        return typeTestRepository.findByStatIdNot(13);
     }
 
     @Override

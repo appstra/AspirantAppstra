@@ -30,7 +30,7 @@ public class TypeTestController {
         return ResponseEntity.ok(typeTestService.updateTypeTest(typeTest));
     }
 
-    @DeleteMapping("/deletetypeTest/{typeTestId}")
+    @PutMapping("/deletetypeTest/{typeTestId}")
     @Operation(summary = "Eliminar Tipo de Prueba", description = "Eliminar un tipo de prueba por ID")
     public ResponseEntity<Boolean> deleteTypeTest(@PathVariable("typeTestId") Integer typeTestId){
         return ResponseEntity.ok(typeTestService.deleteTypeTest(typeTestId));
