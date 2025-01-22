@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //se quitan las sessiones
                 .authorizeHttpRequests()// para autorizar las peticiones HTTP
                 .requestMatchers("api/v1/ResponseEvaluation/saveresponseevaluation").permitAll() // permite consumir sin autenticacion
+                .requestMatchers("/api/v1/TypeTest/fullTypeTests/**").permitAll() // permite consumir sin autenticacion
                 .anyRequest() // cualquier peticion que llegue
                 .authenticated()// debe estar auntenticado
                 .and() // y
