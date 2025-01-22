@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -57,6 +58,11 @@ public class TypeTestImpl implements TypeTestService {
     public TypeTest getTypeTest(Integer typeTestId) {
         return typeTestRepository.findById(typeTestId)
                 .orElseThrow(() -> new NoSuchElementException("El tipo de test con el ID: " + typeTestId + " no se encontró"));
+    }
+
+    @Override
+    public List<Map<String, Object>> getFullTypeTests(Integer typeTestId) {
+        return typeTestRepository.getFullTypeTests(typeTestId);
     }
 }
 

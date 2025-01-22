@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/TypeTest")
@@ -46,6 +47,12 @@ public class TypeTestController {
     @Operation(summary = "Información de Tipo de Prueba", description = "Obtener información de un tipo de prueba por ID")
     public ResponseEntity<TypeTest> getTypeTest(@PathVariable("typeTestId") Integer typeTestId){
         return ResponseEntity.ok(typeTestService.getTypeTest(typeTestId));
+    }
+
+    @GetMapping("/fullTypeTests/{typeTestId}")
+    @Operation(summary = "Información de Tipo de Prueba", description = "Obtener información de un tipo de prueba con sus competencias, preguntas y respuestas")
+    public ResponseEntity<List<Map<String, Object>> > getFullTypeTests(@PathVariable("typeTestId") Integer typeTestId){
+        return ResponseEntity.ok(typeTestService.getFullTypeTests(typeTestId));
     }
 }
 
