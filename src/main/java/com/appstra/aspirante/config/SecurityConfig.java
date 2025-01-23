@@ -24,8 +24,9 @@ public class SecurityConfig {
                 .cors().and() // permite la comunicacion de 2 origenes diferentes EJEMPLO: localHost:8080 y front 42000
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //se quitan las sessiones
                 .authorizeHttpRequests()// para autorizar las peticiones HTTP
-                .requestMatchers("api/v1/ResponseEvaluation/saveresponseevaluation").permitAll() // permite consumir sin autenticacion
+                .requestMatchers("/api/v1/ResponseEvaluation/saveresponseevaluation").permitAll() // permite consumir sin autenticacion
                 .requestMatchers("/api/v1/TypeTest/fullTypeTests/**").permitAll() // permite consumir sin autenticacion
+                .requestMatchers("/api/v1/email/send").permitAll() // permite consumir sin autenticacion
                 .anyRequest() // cualquier peticion que llegue
                 .authenticated()// debe estar auntenticado
                 .and() // y
