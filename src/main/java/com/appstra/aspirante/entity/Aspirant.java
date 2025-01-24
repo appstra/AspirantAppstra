@@ -36,6 +36,7 @@ public class Aspirant {
     private Integer roleId;
 
     @Column(name = "ASPI_APPLICATION_DATE")
+    @Comment("fecha en la cual aplica el aspirante")
     private Timestamp aspirantApplicationDate;
 
     @Column(name = "ASPI_CREATION_DATE")
