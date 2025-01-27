@@ -52,18 +52,22 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
             responseEvaluation.getEvaluation().setEvaluationId(itera.getEvaluationId());
 
             // Guarda Id de Pregunta
-            Integer askId = askRepository.findByAskAsk(itera.getName()).getAskId();
-            if (askId != null) {
-                responseEvaluation.getAsk().setAskId(askId);
-                Integer responseId = responseRepository.findByAskAskIdAndResponseAnswer(askId, itera.getSelected()).getResponseId();
-                if (responseId != null) {
-                    responseEvaluation.getResponse().setResponseId(responseId);
-                    responseEvaluationRepository.save(responseEvaluation);
+            try{
+                Integer askId = askRepository.findByAskAsk(itera.getName()).getAskId();
+                if (askId != null) {
+                    responseEvaluation.getAsk().setAskId(askId);
+                    Integer responseId = responseRepository.findByAskAskIdAndResponseAnswer(askId, itera.getSelected()).getResponseId();
+                    if (responseId != null) {
+                        responseEvaluation.getResponse().setResponseId(responseId);
+                        responseEvaluationRepository.save(responseEvaluation);
+                    } else {
+                        throw new IllegalArgumentException("El responseId es nulo. Error al Guardar");
+                    }
                 } else {
-                    throw new IllegalArgumentException("El responseId es nulo. Error al Guardar");
+                    throw new IllegalArgumentException("no se encontro la pregunta: " + itera.getName());
                 }
-            } else {
-                throw new IllegalArgumentException("El askId es nulo. Error al Guardar");
+            }catch (Exception e){
+                throw new IllegalArgumentException("no se encontro la pregunta: " + itera.getName());
             }
         }
         //actualiza el estado de la evaluacion
