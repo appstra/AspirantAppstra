@@ -60,14 +60,10 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
                     if (responseId != null) {
                         responseEvaluation.getResponse().setResponseId(responseId);
                         responseEvaluationRepository.save(responseEvaluation);
-                    } else {
-                        throw new IllegalArgumentException("El responseId es nulo. Error al Guardar");
                     }
-                } else {
-                    throw new IllegalArgumentException("no se encontro la pregunta: " + itera.getName());
                 }
             }catch (Exception e){
-                throw new IllegalArgumentException("no se encontro la pregunta: " + itera.getName());
+                throw new IllegalArgumentException("Error con la pregunta: " + itera.getName());
             }
         }
         //actualiza el estado de la evaluacion
