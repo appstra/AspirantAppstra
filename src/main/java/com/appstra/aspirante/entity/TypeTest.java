@@ -26,6 +26,9 @@ public class TypeTest {
     @Column(name = "TYTE_NAME")
     private String typeTestName;
 
+    @Column(name = "TYTE_APLICATION")
+    private String typeTestAplication;
+
     @Column(name = "TYTE_DESCRIPTION")
     private String typeTestDescription;
 
