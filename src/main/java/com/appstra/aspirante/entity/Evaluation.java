@@ -34,9 +34,9 @@ public class Evaluation {
     @Column(name = "EVAL_EDIT_USER_ID")
     private Integer evaluationEditUserId;
 
-    @ManyToOne
-    @JoinColumn(name = "ASPI_ID", referencedColumnName = "ASPI_ID")
-    private Aspirant aspirant;
+    @Column(name = "PERS_ID")
+    @Comment("Campo de la base de datos de UserAppstra tabla personas")
+    private Integer personId;
 
     @ManyToOne
     @JoinColumn(name = "TYTE_ID", referencedColumnName = "TYTE_ID")

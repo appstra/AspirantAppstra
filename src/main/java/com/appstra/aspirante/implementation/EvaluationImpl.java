@@ -60,8 +60,8 @@ public class EvaluationImpl implements EvaluationService {
     }
 
     @Override
-    public List<Evaluation> getEvaluationAspirant(Integer evaluationId) {
-        return evaluationRepository.findByAspirantAspirantId(evaluationId);
+    public List<Evaluation> getEvaluationPerson(Integer personId) {
+        return evaluationRepository.findByAspirantAspirantId(personId);
     }
 
     @Override

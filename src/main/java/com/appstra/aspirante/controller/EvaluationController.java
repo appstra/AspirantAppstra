@@ -49,10 +49,10 @@ public class EvaluationController {
         return ResponseEntity.ok(evaluationService.getEvaluation(evaluationId));
     }
 
-    @GetMapping("getEvaluationAspirant/{aspirantId}")
-    @Operation(summary = "Listar Evaluaciones por aspirante", description = "Obtener información de la evaluación por ID de aspirante")
-    public ResponseEntity<List<Evaluation>> getEvaluationAspirant(@PathVariable("aspirantId") Integer aspirantId){
-        return ResponseEntity.ok(evaluationService.getEvaluationAspirant(aspirantId));
+    @GetMapping("getEvaluationAspirant/{personId}")
+    @Operation(summary = "Listar Evaluaciones por personaID", description = "Obtener información de la evaluación por ID de la persona")
+    public ResponseEntity<List<Evaluation>> getEvaluationAspirant(@PathVariable("personId") Integer personId){
+        return ResponseEntity.ok(evaluationService.getEvaluationPerson(personId));
     }
 
     @GetMapping("/stateContratationAspirants/{aspirantId}")

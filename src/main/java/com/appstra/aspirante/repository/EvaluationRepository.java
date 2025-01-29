@@ -17,10 +17,10 @@ public interface EvaluationRepository extends JpaRepository<Evaluation,Integer> 
             		WHEN EXISTS (
             			SELECT 1
             			FROM parameterization.evaluation
-            			WHERE aspi_id = ?1 AND stat_id <> 5
+            			WHERE pers_id = ?1 AND stat_id <> 5
             		) THEN FALSE
             		ELSE TRUE
             	END AS result
             """,nativeQuery = true)
-    Boolean stateContratationAspirants(@Param("aspirantId") Integer aspirantId);
+    Boolean stateContratationAspirants(@Param("personId") Integer personId);
 }
