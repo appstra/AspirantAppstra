@@ -45,11 +45,6 @@ public class ResponseEvaluationController {
         return ResponseEntity.ok(responseEvaluationService.getResponseEvaluation(responseEvaluationId));
     }
 
-    @PostMapping("/QualificationEvaluation")
-    @Operation(summary = "Califica Evaluación", description = "Califica respuesta de evaluación")
-    public ResponseEntity<List<Map<String, Object>>> qualificationEvaluation(@Validated @RequestBody QualificationEvaluationDTO qualificationEvaluationDTO){
-        return ResponseEntity.ok(responseEvaluationService.qualificationEvaluation(qualificationEvaluationDTO));
-    }
     @GetMapping("/QualificationEvaluationPersonalidad/{evaluationId}")
     @Operation(summary = "Califica Evaluación de personalidad", description = "Califica respuesta de evaluación de personalidad")
     public ResponseEntity<Map<String, Object>> QualificationEvaluationPersonalidad(@PathVariable("evaluationId") Integer evaluationId){

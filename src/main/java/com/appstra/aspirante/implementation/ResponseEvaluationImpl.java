@@ -94,11 +94,6 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
     }
 
     @Override
-    public List<Map<String, Object>> qualificationEvaluation(QualificationEvaluationDTO qualificationEvaluationDTO) {
-        return responseEvaluationRepository.QualificationEvaluation(qualificationEvaluationDTO.getAspirantId(),qualificationEvaluationDTO.getEvaluationId());
-    }
-
-    @Override
     public Map<String, Object> QualificationEvaluationPersonalidad(Integer evaluationId) {
         return responseEvaluationRepository.QualificationEvaluationPersonalidad(evaluationId);
     }

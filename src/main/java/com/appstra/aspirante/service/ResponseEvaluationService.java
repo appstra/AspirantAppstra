@@ -14,7 +14,6 @@ public interface ResponseEvaluationService {
     ResponseEvaluation updateResponseEvaluation(ResponseEvaluation responseEvaluation);
     List<ResponseEvaluation> listResponseEvaluations();
     ResponseEvaluation getResponseEvaluation(Integer responseEvaluationId);
-    List<Map<String, Object>> qualificationEvaluation (QualificationEvaluationDTO qualificationEvaluationDTO);
     Map<String, Object> QualificationEvaluationPersonalidad (Integer evaluationId);
     List<Map<String, Object>> qualificationEvaluationPersonId (Integer personId);
     Map<String, Object> QualificationEvaluationPersonalidadPersonId (Integer personId);
