@@ -84,5 +84,10 @@ public class EvaluationImpl implements EvaluationService {
         }
         return employeeDTO;
     }
+
+    @Override
+    public Boolean finallyEvaliation(Integer evaluationId) {
+        return evaluationRepository.finallyEvaliation(evaluationId);
+    }
 }
 

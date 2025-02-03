@@ -67,9 +67,13 @@ public class ResponseEvaluationImpl implements ResponseEvaluationService {
             }
         }
         //actualiza el estado de la evaluacion
-        Evaluation evaluation = evaluationImpl.getEvaluation(answerEvaluationDTO.get(0).getEvaluationId());
-        evaluation.setStateId(5);
-        evaluationImpl.updateEvaluation(evaluation);
+        if(evaluationImpl.finallyEvaliation(answerEvaluationDTO.get(0).getEvaluationId())){
+            Evaluation evaluation = evaluationImpl.getEvaluation(answerEvaluationDTO.get(0).getEvaluationId());
+            evaluation.setStateId(5);
+            evaluationImpl.updateEvaluation(evaluation);
+        }else{
+            System.out.println("No ha terminado en su totalidad la prueba");
+        }
         return true;
     }
 

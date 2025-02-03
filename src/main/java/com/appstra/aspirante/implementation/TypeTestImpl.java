@@ -64,5 +64,10 @@ public class TypeTestImpl implements TypeTestService {
     public List<Map<String, Object>> getFullTypeTests(Integer typeTestId) {
         return typeTestRepository.getFullTypeTests(typeTestId);
     }
+
+    @Override
+    public List<Map<String, Object>> getFullTypeTestsEvaluation(Integer evaluationId, Integer typeTestId) {
+        return typeTestRepository.getFullTypeTestsEvaluation(evaluationId,typeTestId);
+    }
 }
 

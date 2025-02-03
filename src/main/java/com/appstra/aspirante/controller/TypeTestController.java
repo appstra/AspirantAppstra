@@ -54,5 +54,11 @@ public class TypeTestController {
     public ResponseEntity<List<Map<String, Object>> > getFullTypeTests(@PathVariable("typeTestId") Integer typeTestId){
         return ResponseEntity.ok(typeTestService.getFullTypeTests(typeTestId));
     }
+
+    @GetMapping("/fullTypeTests/{evaluationId}/{typeTestId}")
+    @Operation(summary = "Lista las preguntas que hace falta responder al aspirante", description = "Obtener información de un tipo de prueba con sus competencias, preguntas y respuestas que le hace falta")
+    public ResponseEntity<List<Map<String, Object>> > getFullTypeTestsEvaluation(@PathVariable("evaluationId") Integer evaluationId,@PathVariable("typeTestId") Integer typeTestId){
+        return ResponseEntity.ok(typeTestService.getFullTypeTestsEvaluation(evaluationId,typeTestId));
+    }
 }
 

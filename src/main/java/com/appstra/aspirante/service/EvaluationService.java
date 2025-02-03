@@ -13,4 +13,5 @@ public interface EvaluationService {
     Evaluation getEvaluation(Integer evaluationId);
     List<Evaluation> getEvaluationPerson (Integer personId);
     EmployeeDTO stateContratationAspirants(Integer aspirantId);
+    Boolean finallyEvaliation(Integer evaluationId);
 }

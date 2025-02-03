@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface TypeTestRepository extends JpaRepository<TypeTest,Integer> {
+
     List<TypeTest> findByStatIdNot(Integer stateId);
+
     @Query(value = """
         select
             tyte.tyte_id as "typeTestId",
@@ -27,7 +29,29 @@ public interface TypeTestRepository extends JpaRepository<TypeTest,Integer> {
             inner join parameterization.ask ask on comp.comp_id = ask.comp_id
             left join parameterization.response resp on ask.ask_id = resp.ask_id
         where
-            tyte.tyte_id = ?1 """,nativeQuery = true)
+            tyte.tyte_id = ?1""",nativeQuery = true)
     List<Map<String, Object>> getFullTypeTests (@Param("typeTestId") Integer typeTestId);
+
+    @Query(value = """
+            select
+            	tyte.tyte_id as "typeTestId",
+            	tyte.tyte_name as "typeTestName",
+            	comp.comp_id as "competenceId",
+            	comp.comp_name as "competenceName",
+            	ask.ask_id as "askId",
+            	ask.ask_ask as "askAsk",
+            	ask.ask_type as "askType",
+            	resp.resp_id as "responseId",
+            	resp.resp_answer as "responseAnswer"
+            from
+            	parameterization.type_test tyte
+            	inner join parameterization.competence comp on tyte.tyte_id = comp.tyte_id
+            	inner join parameterization.ask ask on comp.comp_id = ask.comp_id
+            	left join parameterization.response resp on ask.ask_id = resp.ask_id
+            	left join (select ask_id from transactional.response_evaluation where eval_id = ?1) respuestaPersona on ask.ask_id = respuestaPersona.ask_id
+            where
+            	tyte.tyte_id = ?2
+            	and respuestaPersona.ask_id is null""",nativeQuery = true)
+    List<Map<String, Object>> getFullTypeTestsEvaluation (@Param("typeTestId") Integer typeTestId,@Param("evaluationId") Integer evaluationId);
 
 }

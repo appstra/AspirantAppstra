@@ -13,5 +13,6 @@ public interface TypeTestService {
     List<TypeTest> listTypeTests();
     TypeTest getTypeTest(Integer typeTestId);
     List<Map<String, Object>> getFullTypeTests (Integer typeTestId);
+    List<Map<String, Object>> getFullTypeTestsEvaluation (Integer evaluationId, Integer typeTestId);
 }
 
