@@ -60,5 +60,11 @@ public class EvaluationController {
     public ResponseEntity<EmployeeDTO> stateContratationAspirants(@PathVariable("aspirantId") Integer aspirantId){
         return ResponseEntity.ok(evaluationService.stateContratationAspirants(aspirantId));
     }
+
+    @GetMapping("/publicEvaluation/{evaluationId}")
+    @Operation(summary = "Información de la Evaluación publica", description = "Obtener información de la evaluación por ID publica")
+    public ResponseEntity<Evaluation> getPublicEvaluation(@PathVariable("evaluationId") Integer evaluationId){
+        return ResponseEntity.ok(evaluationService.getEvaluation(evaluationId));
+    }
 }
 

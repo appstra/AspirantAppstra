@@ -93,7 +93,7 @@ public class EmailMeth implements EmailService {
             <div class="email-container">
                 <!-- Encabezado -->
                 <div class="header">
-                    Appstra
+                    Grupo Empresarial
                 </div>
                 <!-- Contenido del correo -->
                 <div class="content">
