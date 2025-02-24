@@ -11,6 +11,8 @@ public interface EvaluationRepository extends JpaRepository<Evaluation,Integer> 
 
     List<Evaluation> findByPersonId (Integer aspirantId);
 
+    List<Evaluation> findByStateIdAndTypeTestTypeTestId(Integer stateId, Integer typeTestId);
+
     @Query(value = """
             SELECT
             	CASE

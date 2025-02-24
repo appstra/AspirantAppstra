@@ -66,5 +66,11 @@ public class EvaluationController {
     public ResponseEntity<Evaluation> getPublicEvaluation(@PathVariable("evaluationId") Integer evaluationId){
         return ResponseEntity.ok(evaluationService.getEvaluation(evaluationId));
     }
+
+    @GetMapping("evaluationsCompleted/{typeTestId}")
+    @Operation(summary = "Información de la Evaluación finalizadas", description = "Lista las evaluaciones finalizadas")
+    public ResponseEntity<List<Evaluation>> getEvaluationsCompleted(@PathVariable("typeTestId") Integer typeTestId){
+        return ResponseEntity.ok(evaluationService.getEvaluationsCompleted(typeTestId));
+    }
 }
 

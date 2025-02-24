@@ -89,5 +89,10 @@ public class EvaluationImpl implements EvaluationService {
     public Boolean finallyEvaliation(Integer evaluationId) {
         return evaluationRepository.finallyEvaliation(evaluationId);
     }
+
+    @Override
+    public List<Evaluation> getEvaluationsCompleted(Integer typeTestId) {
+        return evaluationRepository.findByStateIdAndTypeTestTypeTestId(5,typeTestId);
+    }
 }
 
